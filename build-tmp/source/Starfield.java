@@ -19,11 +19,11 @@ public void setup()
 {
 	size(600,600);
 	one = new Particle[101];
-	for(int i=0; i < 100; i++)
+	for(int i=0; i < 99; i++)
 	{
 		one[i] = new NormalParticle();
 	}
-	//one[99] = new Jumbo();
+	one[99] = new Jumbo();
 	one[100] = new OddballParticle();
 }
 public void draw()
@@ -36,7 +36,6 @@ public void draw()
 		one[i].move();
 		one[i].show();
 	}
-	
 }
 public void mousePressed()
 {
@@ -44,12 +43,11 @@ public void mousePressed()
 	{
 		((NormalParticle)one[j]).xNPos = mouseX;
 		((NormalParticle)one[j]).yNPos = mouseY;
-		//((NormalParticle)one[j]).angle = ((NormalParticle)one[j]).angle + 1;
 	}
 }
 class NormalParticle implements Particle
 {
-	int r1, g1, b1;
+	int r1, g1, b1, sizze;
 	double xNPos, yNPos, speed, angle;
 	NormalParticle()
 	{
@@ -60,6 +58,7 @@ class NormalParticle implements Particle
 		r1 = (int)(Math.random()*256);
 		g1 = (int)(Math.random()*256);
 		b1 = (int)(Math.random()*256);
+		sizze = 20;
 	}
 	public void move()
 	{
@@ -71,7 +70,7 @@ class NormalParticle implements Particle
 	{
 		noStroke();
 		fill(r1,g1,b1);
-		ellipse((float)xNPos,(float)yNPos,20,20);
+		ellipse((float)xNPos,(float)yNPos,sizze,sizze);
 	}
 
 }
@@ -105,33 +104,13 @@ class OddballParticle implements Particle
 		rect((float)xOPos,(float)yOPos,30,30);
 	}
 }
-// class Jumbo implements Particle
-// {
-// 	int r1, g1, b1;
-// 	double xNPos, yNPos, speed, angle;
-// 	Jumbo()
-// 	{
-// 		xNPos = 300;
-// 		yNPos = 300;
-// 		speed = Math.random()*2;
-// 		angle = Math.random()*2*PI;
-// 		r1 = (int)(Math.random()*256);
-// 		g1 = (int)(Math.random()*256);
-// 		b1 = (int)(Math.random()*256);
-// 	}
-// 	public void move()
-// 	{
-// 		xNPos = xNPos + (Math.cos(angle))*speed;
-// 		yNPos = yNPos + (Math.sin(angle))*speed;
-// 		angle = angle + 0.01;
-// 	}
-// 	public void show()
-// 	{
-// 		noStroke();
-// 		fill(r1,g1,b1);
-// 		ellipse((float)xNPos,(float)yNPos,100,100);
-// 	}
-// }
+class Jumbo extends NormalParticle
+{
+	Jumbo()
+	{
+		sizze = 100;
+	}
+}
 
 
   static public void main(String[] passedArgs) {
